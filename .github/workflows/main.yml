@@ -22,5 +22,5 @@ jobs:
 
     - name: Push Docker Image
       run: |
-        docker tag dockerhub_username/my-app dockerhub_username/my-app:v1
-        docker push dockerhub_username/my-app:v1
+        docker tag williamcare/williamcare williamcare/williamcare:v8
+        docker push williamcare/williamcare:v8
