@@ -27,8 +27,8 @@ jobs:
 
     - name: Build and Tag Docker Image
       run: |
-        docker build -t $DOCKER_USERNAME/williamcare:latest .
+        docker build -t williamcare/williamcare:latest .
 
     - name: Push Docker Image
       run: |
-        docker push $DOCKER_USERNAME/williamcare:latest
+        docker push williamcare/williamcare:latest
