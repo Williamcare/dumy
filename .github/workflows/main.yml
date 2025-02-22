@@ -31,5 +31,4 @@ jobs:
 
     - name: Push Docker Image
       run: |
-        docker tag $DOCKER_USERNAME/my-app:latest $DOCKER_USERNAME/williamcare:latest
         docker push $DOCKER_USERNAME/williamcare:latest
