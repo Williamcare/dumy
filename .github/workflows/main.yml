@@ -10,20 +10,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+    - name: Checkout Code
+      uses: actions/checkout@v4
 
-    - name: Build Docker Image
-      run: |
-        docker build -t dockerhub_username/my-app .
+    - name: Set Up Docker Buildx
+      uses: docker/setup-buildx-action@v2
 
-    - name: Login to DockerHub
+    - name: Log in to DockerHub
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
+    - name: Build and Tag Docker Image
+      run: |
+        docker build -t $DOCKER_USERNAME/my-app:latest .
+
     - name: Push Docker Image
       run: |
-        docker tag williamcare/williamcare williamcare/williamcare:v8
-        docker push williamcare/williamcare:v8
+        docker tag $DOCKER_USERNAME/my-app:latest $DOCKER_USERNAME/my-app:v8
+        docker push $DOCKER_USERNAME/my-app:latest
+        docker push $DOCKER_USERNAME/my-app:v8
